@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="post" action="/rezerwuj">
+    <table>
+        <thead>
+            <tr>
+                <th>Miasto</th>
+                <th>Hotel</th>
+                <th>Pojemność</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for room in rooms %} 
+                <tr>
+                    <td>{{ room.hotel.city.name }}</td>
+                    <td>{{ room.hotel.name }}</td>
+                    <td>{{ room.capacity }}</td>
+                    <td>
+                        <input type="radio" id="room_{{ room.id }}" 
+                        name="selected_room" value="{{ room.id }}">
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    
+        <input type="hidden" name="check-in" value="{{ data[0] }}">
+        <input type="hidden" name="check-out" value="{{ data[1] }}">
+        <input type="hidden" name="guests" value="{{ data[2] }}">
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" required>
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" required>
+        <label for="phone_number">Phone Number:</label>
+        <input type="text" id="phone_number" name="phone_number" required>
+        <button type="submit">Reserve</button>
+    </form>
+{% endblock %}

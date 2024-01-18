@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="post" action="/rezerwacja">
+    <label for="telefon">Numer telefonu podany przy rezerwowaniu:</label>
+    <input type="text" id="telefon" name="telefon">
+
+    <button type="submit">Szukaj</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID rezerwacji</th>
+            <th>Nazwa Hotelu</th>
+            <th>Nr Pokoju</th>
+            <th>Data Zameldowania</th>
+            <th>Data Wymeldowania</th>
+            <th>Ilość Osób</th>
+            <th>Imie</th>
+            <th>Nazwisko</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for reservation in reservations %}
+        <tr>
+            <td>{{ reservation.id }}</td>
+            <td>{{ reservation.room.hotel.name }}</td>
+            <td>{{ reservation.room.number }}</td>
+            <td>{{ reservation.check_in_date }}</td>
+            <td>{{ reservation.check_out_date }}</td>
+            <td>{{ reservation.number_of_people }}</td>
+            <td>{{ reservation.first_name }}</td>
+            <td>{{ reservation.last_name }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID rezerwacji</th>
+            <th>Nazwa Restauracji</th>
+            <th>Nr Stolika</th>
+            <th>Imie</th>
+            <th>Ilość Ludzi</th>
+            <th>Data</th>
+            <th>Godzina</th>
+            <th>Koniec</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for table in tables %}
+        <tr>
+            <td>{{ table.id }}</td>
+            <td>{{ table.table.restaurant.name }}</td>
+            <td>{{ table.table.number }}</td>
+            <td>{{ table.first_name }}</td>
+            <td>{{ table.number_of_people }}</td>
+            <td>{{ table.date }}</td>
+            <td>{{ table.time }}</td>
+            <td>{{ table.end_time }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

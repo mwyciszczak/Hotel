@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        <form method="post" action="/">
+            <label for="location">Miejscowość:</label>
+            <input list="locations" id="location" name="location">
+            <datalist id="locations">
+              {% for city in cities %} 
+                  <option value="{{ city }}">
+              {% endfor %}
+              </datalist>
+
+            <label for="check-in">Data zameldowania:</label>
+            <input type="date" id="check-in" name="check-in">
+            
+            <label for="check-out">Data wymeldowania:</label>
+            <input type="date" id="check-out" name="check-out">
+            
+            <label for="guests">Ilość osób:</label>
+            <input type="number" id="guests" name="guests">
+            <button type="submit">Szukaj</button>
+        </form>
+
+{% endblock %}
